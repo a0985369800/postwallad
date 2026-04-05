@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>局所列表｜郵局牆面廣告版位</title>
+  <meta name="description" content="瀏覽基隆市、新北市汐止區、瑞芳區各郵局牆面廣告版位，依縣市、行政區篩選，找到最適合你品牌的刊登地點。">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://postwallad.com/locations.html">
+  <meta property="og:title" content="局所列表｜郵局牆面廣告版位">
+  <meta property="og:description" content="基隆、汐止、瑞芳地區郵局廣告版位列表，線上選位即時報價。">
+  <meta property="og:url" content="https://postwallad.com/locations.html">
+  <meta property="og:type" content="website">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="style.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+  <!-- 導覽列 -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow-sm"
+       style="background-color:#007B40" role="navigation" aria-label="主選單">
+    <div class="container-fluid px-3">
+      <a class="navbar-brand fw-bold d-flex align-items-center gap-2" href="index.html">
+        <i class="bi bi-building-fill" aria-hidden="true"></i>
+        <span>中華郵政 牆面廣告版位</span>
+      </a>
+      <button class="navbar-toggler border-0" type="button"
+        data-bs-toggle="collapse" data-bs-target="#navMenu"
+        aria-controls="navMenu" aria-expanded="false" aria-label="展開選單">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navMenu">
+        <ul class="navbar-nav ms-auto gap-lg-1">
+          <li class="nav-item"><a class="nav-link" href="index.html">首頁</a></li>
+          <li class="nav-item"><a class="nav-link active" href="locations.html">局所列表</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">聯絡我們</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 主內容 -->
+  <div class="container" style="padding-top:70px">
+
+    <!-- 頁面標題 -->
+    <div class="bg-white border-bottom px-3 py-3 mb-3">
+      <h1 class="h5 fw-bold mb-0">
+        <i class="bi bi-geo-alt-fill text-danger me-2"></i>郵局廣告版位列表
+      </h1>
+    </div>
+
+    <!-- 篩選列 -->
+    <div class="bg-white border rounded shadow-sm px-3 py-2 mb-3">
+      <div class="row g-2 align-items-center">
+        <div class="col-6 col-md-auto">
+          <select class="form-select form-select-sm" id="cityFilter">
+            <option value="">全部縣市</option>
+          </select>
+        </div>
+        <div class="col-6 col-md-auto">
+          <select class="form-select form-select-sm" id="districtFilter">
+            <option value="">全部行政區</option>
+          </select>
+        </div>
+        <div class="col-12 col-md">
+          <div class="input-group input-group-sm">
+            <span class="input-group-text bg-white"><i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" id="searchInput" placeholder="搜尋局名或地址…">
+          </div>
+        </div>
+        <div class="col-auto">
+          <div class="form-check mb-0">
+            <input class="form-check-input" type="checkbox" id="availableOnly" checked>
+            <label class="form-check-label small" for="availableOnly">只顯示有可用版位</label>
+          </div>
+        </div>
+        <div class="col-auto ms-auto">
+          <span class="text-muted small" id="resultCount"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 載入中 -->
+    <div id="loadingState" class="text-center py-5">
+      <div class="spinner-border text-success" role="status">
+        <span class="visually-hidden">載入中</span>
+      </div>
+      <p class="mt-3 text-muted small">正在讀取局所資料…</p>
+    </div>
+
+    <!-- 錯誤 -->
+    <div id="errorState" class="alert alert-danger mx-2 d-none">
+      <i class="bi bi-exclamation-triangle-fill me-2"></i>資料載入失敗，請稍後再試。
+    </div>
+
+    <!-- 局所卡片列表 -->
+    <div class="row g-3" id="locationsGrid"></div>
+
+    <!-- 無結果 -->
+    <div id="emptyState" class="text-center py-5 d-none">
+      <i class="bi bi-search text-muted" style="font-size:3rem"></i>
+      <p class="mt-3 text-muted">沒有符合條件的局所</p>
+    </div>
+
+  </div>
+
+  <!-- 頁尾 -->
+  <footer class="bg-dark text-white py-5 mt-5" role="contentinfo" id="contact">
+    <div class="container">
+      <div class="row g-4 align-items-start">
+        <div class="col-md-4">
+          <h5 class="fw-bold mb-3" style="color:#4ade80">中華郵政 牆面廣告版位</h5>
+          <p class="text-white-50 small mb-0">
+            服務區域：基隆市全區・新北市汐止區・新北市瑞芳區<br>
+            本網站資料由 Google Sheets 即時提供，版位狀態以實際確認為準。
+          </p>
+        </div>
+        <div class="col-md-4">
+          <h6 class="fw-bold mb-3 text-white">聯絡我們</h6>
+          <ul class="list-unstyled text-white-50 small mb-0">
+            <li class="mb-2">
+              <i class="bi bi-building me-2"></i>
+              <a href="https://www.breathtiger.com" target="_blank" rel="noopener"
+                 class="text-white-50 text-decoration-none">虎之呼吸科技有限公司</a>
+            </li>
+            <li class="mb-2">
+              <i class="bi bi-envelope me-2"></i>
+              <a href="mailto:service@breathtiger.com"
+                 class="text-white-50 text-decoration-none">service@breathtiger.com</a>
+            </li>
+            <li><i class="bi bi-chat-dots me-2"></i>LINE 加入好友諮詢</li>
+          </ul>
+        </div>
+        <div class="col-md-4 d-flex flex-column align-items-md-end align-items-start">
+          <a href="https://lin.ee/Rtr3Tlq4" target="_blank" rel="noopener">
+            <img src="https://scdn.line-apps.com/n/line_add_friends/btn/zh-Hant.png"
+                 alt="加入好友" height="36" border="0">
+          </a>
+        </div>
+      </div>
+      <hr class="border-secondary my-4">
+      <p class="text-white-50 text-center mb-0" style="font-size:12px">
+        &copy; <span id="footerYear"></span> 虎之呼吸科技有限公司｜版權所有，翻印必究
+      </p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="site.js"></script>
+  <script>document.getElementById('footerYear').textContent = new Date().getFullYear();</script>
+</body>
+</html>

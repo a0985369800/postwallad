@@ -1,0 +1,175 @@
+/* ======================================
+   郵局牆面廣告版位 — 樣式表
+   Bootstrap 5 基礎，僅補充 BS 未涵蓋部分
+   ====================================== */
+
+/* ── 導覽列高度補償 ── */
+body { padding-top: 56px; }
+#heroSection { margin-top: -56px; padding-top: 0; }
+
+/* ── 輪播圖（Bootstrap 5 img + carousel-caption 結構）── */
+
+/* 圖片滿版、固定高度、裁切 */
+.carousel-hero-img {
+  height: 100svh;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* caption 覆蓋整張投影片，加深色漸層 */
+.carousel-hero-caption {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to bottom, rgba(0,0,0,.1) 0%, rgba(0,0,0,.6) 100%);
+  padding-bottom: 0;   /* 覆寫 Bootstrap 預設 padding */
+}
+
+/* 標題文字陰影 */
+.carousel-hero-title {
+  text-shadow: 0 2px 14px rgba(0,0,0,.75);
+}
+
+/* 向下箭頭動畫 */
+.scroll-hint {
+  z-index: 20;
+  pointer-events: none;
+}
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(8px); }
+}
+.scroll-bounce {
+  animation: bounce 1.6s ease-in-out infinite;
+}
+
+/* ---------- 圖片容器 ---------- */
+.img-wrapper {
+  width: 100%;
+  height: 140px;
+  overflow: hidden;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 2.2rem;
+  background: #f8f9fa;
+}
+
+/* ---------- 局所卡片 ---------- */
+.location-card {
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.location-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.13) !important;
+}
+
+/* ---------- 版位卡片 ---------- */
+.space-card-selected {
+  border-color: #198754 !important;
+  border-width: 2px !important;
+}
+.opacity-60 {
+  opacity: 0.55;
+}
+
+/* ---------- 價格區塊 ---------- */
+.price-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+/* ---------- 報價單 Modal ---------- */
+.quote-info-table td {
+  padding: 2px 6px;
+  font-size: 13px;
+}
+
+/* ======================================
+   列印樣式
+   ====================================== */
+@media print {
+  /* 隱藏非列印區域 */
+  body > *:not(#print-overlay) {
+    display: none !important;
+  }
+
+  #printArea {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    padding: 16px !important;
+  }
+
+  .d-print-none {
+    display: none !important;
+  }
+
+  /* 表格字體縮小 */
+  #printArea table {
+    font-size: 10px;
+  }
+  #printArea th,
+  #printArea td {
+    padding: 3px 5px !important;
+  }
+
+  /* 標題 */
+  #printArea h4 {
+    font-size: 16px;
+  }
+
+  /* 強制分頁避免表格斷行 */
+  #printArea table {
+    page-break-inside: auto;
+  }
+  #printArea tr {
+    page-break-inside: avoid;
+  }
+
+  /* 隱藏 Modal 框架 */
+  .modal-backdrop {
+    display: none !important;
+  }
+  .modal {
+    position: static !important;
+    display: block !important;
+    overflow: visible !important;
+  }
+  .modal-dialog {
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+  .modal-content {
+    border: none !important;
+    box-shadow: none !important;
+  }
+  .modal-header,
+  .modal-footer {
+    display: none !important;
+  }
+  .modal-body {
+    padding: 0 !important;
+  }
+}
