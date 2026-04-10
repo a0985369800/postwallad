@@ -6,7 +6,7 @@
 
 ## 技術棧
 - 純靜態前端：HTML / CSS / Vanilla JS
-- Bootstrap 5.3.3 + Bootstrap Icons 1.11.3
+- Bootstrap 5.3.3 + Font Awesome 6（Kit: `https://kit.fontawesome.com/f6651e765b.js`）
 - 後端：Google Apps Script（Code.gs）
 - 資料庫：Google Sheets（Spreadsheet ID: `159dxUpnxrXp-V3uR4c6BqWhZUep-4_8MpENLI7dimeY`）
 - 跨域方案：JSONP（Apps Script 不支援 CORS）
@@ -95,6 +95,7 @@ postwallad/
 - 郵局列表（locations.html）：JSONP 載入、縣市/行政區篩選、搜尋、「只顯示有可用版位」checkbox、卡片展示、可用版位數 badge
 - 後端 API（Code.gs）：所有 action 路由正常
 - 版位詳細頁（spaces.html）：郵局資訊 + Google Maps 嵌入、版位卡片列表、月份輸入即時報價、加入詢價/取消 toggle、詢價 Modal（含刪除單項）、圖片點擊放大
+- Icon 系統：全站從 Bootstrap Icons 遷移至 Font Awesome 6（`fa-solid fa-*` 格式）
 
 ### ⚠️ 待確認
 - ad_spaces 欄 I、O、Q、S 的確切欄位名稱（現用 `includes()` 模糊比對）
