@@ -100,7 +100,7 @@ function buildCarousel(slides) {
       <div class="carousel-caption carousel-hero-caption d-flex flex-column align-items-center justify-content-center">
         <h1 class="display-4 fw-bold lh-sm mb-3 carousel-hero-title">${escHtml(slide.slogan || '')}</h1>
         <a href="locations.html" class="btn btn-danger btn-lg px-5 fw-bold shadow" role="button">
-          <i class="bi bi-arrow-right-circle me-2" aria-hidden="true"></i>${escHtml(slide.cta || '瀏覽版位')}
+          <i class="fa-solid fa-circle-arrow-right me-2" aria-hidden="true"></i>${escHtml(slide.cta || '瀏覽版位')}
         </a>
       </div>`;
     inner.appendChild(item);
@@ -154,7 +154,7 @@ function renderLocations(locations, spaces) {
   if (_allLocations.length === 0) {
     // 區分「API 未部署」vs「真的沒資料」
     document.getElementById('errorState').innerHTML =
-      '<i class="bi bi-exclamation-triangle-fill me-2"></i>' +
+      '<i class="fa-solid fa-triangle-exclamation me-2"></i>' +
       '資料載入失敗。請確認 Apps Script 已重新部署，並開放「任何人」存取。';
     document.getElementById('errorState').classList.remove('d-none');
     return;
@@ -252,7 +252,7 @@ function renderGrid(locations) {
       ? `<img src="${escHtml(imgUrl)}" class="card-img-top" alt="${escHtml(loc['局名'] || '')}"
               style="height:200px;object-fit:cover${availCnt > 0 ? ';cursor:pointer' : ''}" loading="lazy">`
       : `<div class="bg-light d-flex align-items-center justify-content-center text-muted"
-              style="height:200px"><i class="bi bi-building fs-1"></i></div>`;
+              style="height:200px"><i class="fa-solid fa-building fs-1"></i></div>`;
     return `
       <div class="col-6 col-md-4 col-lg-3">
         <div class="card h-100 shadow-sm border-0">
@@ -344,12 +344,12 @@ function isAvailable(space) {
         <div class="row g-3">
           <div class="col-md-6">
             <h1 class="h5 fw-bold mb-2">
-              <i class="bi bi-building-fill text-success me-2"></i>${escHtml(loc['局名'] || '')}
+              <i class="fa-solid fa-building text-success me-2"></i>${escHtml(loc['局名'] || '')}
             </h1>
             <p class="text-muted small mb-1">
-              <i class="bi bi-geo-alt me-1"></i>${escHtml(fullAddr)}
+              <i class="fa-solid fa-location-dot me-1"></i>${escHtml(fullAddr)}
             </p>
-            ${loc['電話號碼'] ? `<p class="text-muted small mb-0"><i class="bi bi-telephone me-1"></i>${escHtml(String(loc['電話號碼']))}</p>` : ''}
+            ${loc['電話號碼'] ? `<p class="text-muted small mb-0"><i class="fa-solid fa-phone me-1"></i>${escHtml(String(loc['電話號碼']))}</p>` : ''}
           </div>
           <div class="col-md-6">
             <iframe src="${escHtml(mapSrc)}"
@@ -369,7 +369,7 @@ function isAvailable(space) {
     if (_spaces.length === 0) {
       el.innerHTML = `
         <div class="text-center py-5">
-          <i class="bi bi-info-circle text-muted" style="font-size:3rem"></i>
+          <i class="fa-solid fa-circle-info text-muted" style="font-size:3rem"></i>
           <p class="mt-3 text-muted">此局所目前無可刊登版位</p>
           <a href="locations.html" class="btn btn-outline-success btn-sm">返回局所列表</a>
         </div>`;
@@ -414,7 +414,7 @@ function isAvailable(space) {
               <div class="col-12 col-sm-auto">
                 <button class="btn btn-danger btn-sm w-100" id="cartBtn_${idx}"
                         onclick="addToInquiry(${idx})">
-                  <i class="bi bi-plus-circle me-1"></i>加入詢價
+                  <i class="fa-solid fa-circle-plus me-1"></i>加入詢價
                 </button>
               </div>
             </div>
@@ -425,7 +425,7 @@ function isAvailable(space) {
     el.innerHTML = `
       <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="h6 fw-bold mb-0">
-          <i class="bi bi-grid me-2 text-success"></i>可刊登版位（共 ${_spaces.length} 處）
+          <i class="fa-solid fa-grip me-2 text-success"></i>可刊登版位（共 ${_spaces.length} 處）
         </h2>
       </div>
       ${cardsHtml}`;
@@ -463,7 +463,7 @@ function isAvailable(space) {
     if (existing >= 0) {
       // 已在清單 → 移除（toggle off）
       _cart.splice(existing, 1);
-      btn.innerHTML = '<i class="bi bi-plus-circle me-1"></i>加入詢價';
+      btn.innerHTML = '<i class="fa-solid fa-circle-plus me-1"></i>加入詢價';
       btn.classList.replace('btn-success', 'btn-danger');
     } else {
       // 加入清單
@@ -471,7 +471,7 @@ function isAvailable(space) {
       const space  = _spaces[idx];
       const total  = calcSpaceTotal(space, months);
       _cart.push({ idx, space, months, total });
-      btn.innerHTML = '<i class="bi bi-check-circle-fill me-1"></i>已加入詢價';
+      btn.innerHTML = '<i class="fa-solid fa-circle-check me-1"></i>已加入詢價';
       btn.classList.replace('btn-danger', 'btn-success');
     }
 
@@ -507,7 +507,7 @@ function isAvailable(space) {
           <td class="text-center">
             <button class="btn btn-outline-danger btn-sm py-0 px-1" style="font-size:11px"
                     onclick="removeFromInquiry(${c.idx})">
-              <i class="bi bi-trash3"></i>
+              <i class="fa-solid fa-trash"></i>
             </button>
           </td>
         </tr>`;
@@ -518,7 +518,7 @@ function isAvailable(space) {
       ? `<div class="text-center text-muted py-4 small">詢價清單已清空</div>`
       : `<div class="p-3">
           <p class="text-muted small mb-3">
-            <i class="bi bi-building me-1"></i>${locName}
+            <i class="fa-solid fa-building me-1"></i>${locName}
           </p>
           <table class="table table-sm table-bordered mb-2 quote-info-table">
             <thead class="table-light">
@@ -575,7 +575,7 @@ function isAvailable(space) {
     // 同步卡片按鈕
     const btn = document.getElementById(`cartBtn_${idx}`);
     if (btn) {
-      btn.innerHTML = '<i class="bi bi-plus-circle me-1"></i>加入詢價';
+      btn.innerHTML = '<i class="fa-solid fa-circle-plus me-1"></i>加入詢價';
       btn.classList.replace('btn-success', 'btn-danger');
     }
 
@@ -616,7 +616,7 @@ function formatPrice(n) {
 function showSpacesError(msg) {
   document.getElementById('spacesLoading').classList.add('d-none');
   const el = document.getElementById('spacesError');
-  el.innerHTML = `<i class="bi bi-exclamation-triangle-fill me-2"></i>${msg}`;
+  el.innerHTML = `<i class="fa-solid fa-triangle-exclamation me-2"></i>${msg}`;
   el.classList.remove('d-none');
 }
 
