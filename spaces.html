@@ -5,6 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>廣告版位｜郵局牆面廣告版位</title>
   <meta name="description" content="瀏覽各郵局廣告版位，選擇心儀版位並加入詢價清單。">
+  <!-- ── JSON-LD 結構化資料（靜態基礎；局所名稱由 JS 動態補充）── -->
+  <script type="application/ld+json" id="jsonLd">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://postwallad.breathtiger.com/#org",
+        "name": "中華郵政牆面廣告版位",
+        "url": "https://postwallad.breathtiger.com/"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://postwallad.breathtiger.com/spaces.html",
+        "url": "https://postwallad.breathtiger.com/spaces.html",
+        "name": "廣告版位｜郵局牆面廣告版位",
+        "isPartOf": { "@id": "https://postwallad.breathtiger.com/#org" },
+        "description": "瀏覽各郵局廣告版位，選擇心儀版位並加入詢價清單，系統即時計算月租金、印刷及施工費用。",
+        "inLanguage": "zh-TW",
+        "breadcrumb": {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "首頁", "item": "https://postwallad.breathtiger.com/" },
+            { "@type": "ListItem", "position": 2, "name": "局所列表", "item": "https://postwallad.breathtiger.com/locations.html" },
+            { "@type": "ListItem", "position": 3, "name": "廣告版位" }
+          ]
+        }
+      }
+    ]
+  }
+  </script>
+
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
   <link href="style.css" rel="stylesheet">

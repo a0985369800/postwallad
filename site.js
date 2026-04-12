@@ -370,6 +370,23 @@ function isAvailable(space) {
 
   function renderLocationHeader() {
     const loc      = _location;
+
+    // 動態更新 JSON-LD 麵包屑：補入局所名稱
+    const ldEl = document.getElementById('jsonLd');
+    if (ldEl) {
+      try {
+        const ld = JSON.parse(ldEl.textContent);
+        const wp = ld['@graph'].find(n => n['@type'] === 'WebPage');
+        if (wp && wp.breadcrumb) {
+          const items = wp.breadcrumb.itemListElement;
+          if (items[2]) items[2].name = loc['局名'] || '廣告版位';
+          wp.name = `${loc['局名'] || '廣告版位'}｜郵局牆面廣告版位`;
+          wp.url  = location.href;
+          ldEl.textContent = JSON.stringify(ld);
+        }
+      } catch (_) {}
+    }
+
     const city     = (loc['縣市']   || '').trim();
     const district = (loc['行政區'] || '').trim();
     const addr     = (loc['地址']   || '').trim();
