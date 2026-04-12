@@ -6,8 +6,8 @@
 
 ## 技術棧
 - 純靜態前端：HTML / CSS / Vanilla JS
-- Bootstrap 5.3.3 + Font Awesome 6（Kit: `https://kit.fontawesome.com/f6651e765b.js`）
-- 後端：Google Apps Script（Code.gs）
+- Bootstrap 5.3.3 + Font Awesome 6（cdnjs CDN，無網域限制）
+- 後端：Google Apps Script（`Code.gs`，本地有參考副本）
 - 資料庫：Google Sheets（Spreadsheet ID: `159dxUpnxrXp-V3uR4c6BqWhZUep-4_8MpENLI7dimeY`）
 - 跨域方案：JSONP（Apps Script 不支援 CORS）
 
@@ -19,12 +19,19 @@ postwallad/
 ├── index.html       # 首頁（輪播、特色介紹、服務區域、三步驟）
 ├── locations.html   # 郵局列表頁（篩選、搜尋、卡片展示）
 ├── spaces.html      # 版位詳細頁（已完成）
-├── site.js          # 主程式（輪播 + 郵局列表 + 版位頁邏輯）
+├── site.js          # 主程式（輪播 + 郵局列表 + 版位頁邏輯 + SEO 注入）
 ├── spaces.js        # 舊版版位渲染（已廢棄，勿使用）
-├── Code.gs          # Google Apps Script 後端 API
+├── Code.gs          # ⚠️ Apps Script 本地參考副本（勿直接執行，需貼至雲端）
 ├── style.css        # 全站樣式（含列印、版位卡片、報價單）
+├── README.md        # 功能說明與部署指南
 └── CLAUDE.md        # 本文件
 ```
+
+### Code.gs 注意事項
+- 本地 `Code.gs` 是**參考副本**，實際執行在 Google Apps Script 雲端
+- 修改後需手動複製貼至 Apps Script 並**重新部署（建立新版本）**
+- `SPREADSHEET_ID` 佔位符需在雲端編輯器替換為實際值（禁止 commit 實際值）
+- **此檔不得刪除**，作為雲端程式碼的唯一本地備份
 
 ---
 
@@ -80,10 +87,11 @@ postwallad/
 ---
 
 ## API 端點（Code.gs doGet）
-- `?action=carousel`   → 輪播圖資料
-- `?action=locations`  → 郵局列表
-- `?action=spaces`     → 版位列表
-- `?action=bookings`   → 訂單資料
+- `?action=carousel`   → 輪播圖資料（工作表：`Carousel-titile`）
+- `?action=locations`  → 郵局列表（工作表：`locations`）
+- `?action=spaces`     → 版位列表（工作表：`ad_spaces`）
+- `?action=bookings`   → 訂單資料（工作表：`bookings`）
+- `?action=seo`        → 各頁面 SEO meta（工作表：`SEO`）
 - 所有請求須帶 `&callback=函式名稱`（JSONP）
 
 ---
@@ -95,7 +103,8 @@ postwallad/
 - 郵局列表（locations.html）：JSONP 載入、縣市/行政區篩選、搜尋、「只顯示有可用版位」checkbox、卡片展示、可用版位數 badge
 - 後端 API（Code.gs）：所有 action 路由正常
 - 版位詳細頁（spaces.html）：郵局資訊 + Google Maps 嵌入、版位卡片列表、月份輸入即時報價、加入詢價/取消 toggle、詢價 Modal（含刪除單項）、圖片點擊放大
-- Icon 系統：全站從 Bootstrap Icons 遷移至 Font Awesome 6（`fa-solid fa-*` 格式）
+- Icon 系統：全站從 Bootstrap Icons 遷移至 Font Awesome 6（`fa-solid fa-*` 格式，cdnjs CDN）
+- SEO 動態注入：`site.js` 頁面載入時呼叫 `?action=seo`，依頁面檔名匹配 SEO 工作表並更新 title / meta / og 標籤
 
 ### ⚠️ 待確認
 - ad_spaces 欄 I、O、Q、S 的確切欄位名稱（現用 `includes()` 模糊比對）
