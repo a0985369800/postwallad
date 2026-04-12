@@ -1,6 +1,51 @@
 const apiUrl = "https://script.google.com/macros/s/AKfycbwiAeNHdYL2GfI0BcOhOt6iBbkitpQAycK7rhVI5svRVTNKQjfzs4-1vrki-q2fdMklRA/exec";
 
 // ════════════════════════════════
+// SEO 動態注入（從 Google Sheets SEO 工作表）
+// ════════════════════════════════
+(function initSeo() {
+  const page = location.pathname.split('/').pop() || 'index.html';
+  jsonp('seo', function(rows) {
+    if (!rows || rows.length === 0) return;
+    const row = rows.find(r => (r['頁面'] || '').trim() === page);
+    if (!row) return;
+
+    const title    = (row['標題title']     || '').trim();
+    const desc     = (row['meta描述(og)']  || '').trim();
+    const keywords = (row['meta關鍵字(og)']|| '').trim();
+    const ogImg    = (row['og圖片網址']    || '').trim();
+
+    if (title) {
+      document.title = title;
+      setMeta('property', 'og:title',       title);
+      setMeta('name',     'twitter:title',  title);
+    }
+    if (desc) {
+      setMeta('name',     'description',          desc);
+      setMeta('property', 'og:description',       desc);
+      setMeta('name',     'twitter:description',  desc);
+    }
+    if (keywords) {
+      setMeta('name', 'keywords', keywords);
+    }
+    if (ogImg) {
+      setMeta('property', 'og:image',      ogImg);
+      setMeta('name',     'twitter:image', ogImg);
+    }
+  });
+
+  function setMeta(attr, val, content) {
+    let el = document.querySelector(`meta[${attr}="${val}"]`);
+    if (!el) {
+      el = document.createElement('meta');
+      el.setAttribute(attr, val);
+      document.head.appendChild(el);
+    }
+    el.setAttribute('content', content);
+  }
+})();
+
+// ════════════════════════════════
 // 工具函式
 // ════════════════════════════════
 function escHtml(str) {
