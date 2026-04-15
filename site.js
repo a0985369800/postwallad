@@ -445,6 +445,9 @@ function isAvailable(space) {
       const h      = escHtml(String(space['高cm']  || '-'));
       const imgUrl = validUrl(space['File ID圖片網址']);
       const price0 = calcSpaceTotal(space, 1);
+      const feeNote = hasCraneFee(space)
+        ? '廣告媒體+印刷輸出＋施工與復原+<span class="text-danger">吊車</span>等費用'
+        : '廣告媒體+印刷輸出＋施工與復原等費用';
 
       return `
         <div class="card mb-3 shadow-sm border-0" id="spaceCard_${idx}">
@@ -471,7 +474,7 @@ function isAvailable(space) {
               </div>
               <div class="col-12 col-sm-auto text-sm-end">
                 <div class="fw-bold text-danger" id="price_${idx}">NT$ ${formatPrice(price0)}</div>
-                <div class="text-muted" style="font-size:10px">廣告媒體+印刷輸出＋施工與復原等費用</div>
+                <div class="text-muted" style="font-size:10px">${feeNote}</div>
               </div>
               <div class="col-12 col-sm-auto">
                 <button class="btn btn-danger btn-sm w-100" id="cartBtn_${idx}"
@@ -492,6 +495,11 @@ function isAvailable(space) {
       </div>
       ${cardsHtml}`;
     el.classList.remove('d-none');
+  }
+
+  function hasCraneFee(space) {
+    const feeKey = Object.keys(space).find(k => k.includes('吊車費'));
+    return feeKey ? parseNum(space[feeKey]) > 0 : false;
   }
 
   function calcSpaceTotal(space, months) {
